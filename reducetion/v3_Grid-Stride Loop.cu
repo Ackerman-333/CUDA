@@ -3,7 +3,7 @@ __device__ float warp_reduce(float value)
 {
     for(int offset=16;offset>0;offset/=2)
     {
-        __shfl_down_sync(0xffffffff,value,offset);
+        value+=__shfl_down_sync(0xffffffff,value,offset);
     }
     return value;
 }
